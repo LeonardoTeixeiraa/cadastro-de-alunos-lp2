@@ -22,7 +22,8 @@ public class CadastroAlunoController {
     @FXML
     private TextField txtNome, txtMatricula, txtCurso, txtIdade;
 
-    private AlunoService service = new AlunoService();
+    private final AlunoService service = AlunoService.getInstance();
+
 
     @FXML
     private void salvarAluno() {

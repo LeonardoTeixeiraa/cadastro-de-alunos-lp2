@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
+<BorderPane xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.empresa.leonardoteixeiralucassiconeli_projetofinal.controller.PrincipalController">
+
     <top>
-        <MenuBar>
-            <Menu text="Alunos">
-                <MenuItem text="Cadastrar" onAction="#abrirCadastroAluno" />
-            </Menu>
-            <Menu text="Sair">
-                <MenuItem text="Logout" onAction="#logout" />
-            </Menu>
-        </MenuBar>
+        <VBox spacing="5">
+            <MenuBar>
+                <Menu text="Alunos">
+                    <MenuItem text="Cadastrar" onAction="#abrirCadastroAluno" />
+                </Menu>
+                <Menu text="Sair">
+                    <MenuItem text="Logout" onAction="#logout" />
+                </Menu>
+            </MenuBar>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+
+                <TextField fx:id="txtPesquisa" promptText="Pesquisar aluno por nome ou matrícula..." prefWidth="300" />
+                <Button text="Pesquisar" onAction="#pesquisarAluno" />
+            </HBox>
+        </VBox>
     </top>
+
     <center>
         <TableView fx:id="tabelaAlunos">
             <columns>
