@@ -6,6 +6,7 @@ import com.empresa.leonardoteixeiralucassiconeli_projetofinal.service.AlunoServi
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -21,8 +22,10 @@ public class PrincipalController {
     private TableColumn<Aluno, String> colCurso;
     @FXML
     private TableColumn<Aluno, Integer> colIdade;
+    @FXML
+    private TextField txtPesquisa;
 
-    private AlunoService service = new AlunoService();
+    private final AlunoService service = AlunoService.getInstance();
 
     @FXML
     public void initialize() {
@@ -31,7 +34,24 @@ public class PrincipalController {
         colCurso.setCellValueFactory(new PropertyValueFactory<>("curso"));
         colIdade.setCellValueFactory(new PropertyValueFactory<>("idade"));
 
-        tabelaAlunos.getItems().setAll(service.listar());
+        tabelaAlunos.setItems(service.listar());
+    }
+    
+    @FXML
+    private void pesquisarAluno() {
+        String termo = txtPesquisa.getText().toLowerCase();
+
+        if (termo.isBlank()) {
+            tabelaAlunos.setItems(service.listar());
+            return;
+        }
+        
+        var filtrados = service.listar().filtered(aluno
+                -> aluno.getNome().toLowerCase().contains(termo)
+                || aluno.getMatricula().toLowerCase().contains(termo)
+        );
+
+        tabelaAlunos.setItems(filtrados);
     }
 
     @FXML

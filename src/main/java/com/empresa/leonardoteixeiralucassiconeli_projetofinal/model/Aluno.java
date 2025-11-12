@@ -47,4 +47,13 @@ public class Aluno {
         this.idade = idade;
     }
 
+    //Método usado para realizar debug
+    @Override
+    public String toString() {
+        return "Aluno{" + "nome=" + nome
+                + "\n, matricula=" + matricula
+                + "\n,, curso=" + curso
+                + "\n,, idade=" + idade + '}';
+    }
+
 }

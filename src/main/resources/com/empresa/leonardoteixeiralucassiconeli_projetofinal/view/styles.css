@@ -1,0 +1,43 @@
+/* PONTO-CHAVE (CSS): Define a aparência SEPARADA da estrutura. */
+/* Estilo para o painel raiz (o VBox) */
+.root {
+    -fx-background-color: white; /* Fundo cinza claro */
+    -fx-font-family: "Arial";
+}
+/* Estilo padrão para todos os botões */
+.button {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: limegreen; /* Azul */
+    -fx-background-radius: 5;
+}
+.button:hover {
+    -fx-background-color: lime; /* Azul mais escuro */
+}
+/* --- ESTILOS DE FEEDBACK (O mais importante!) --- */
+/* Esta classe de estilo será aplicada via Controller para sucesso */
+.label-sucesso {
+    -fx-text-fill: #008000; /* Verde */
+    -fx-font-weight: bold;
+}
+/* Esta classe de estilo será aplicada via Controller para erro */
+.label-erro {
+    -fx-text-fill: #D32F2F; /* Vermelho */
+    -fx-font-weight: bold;
+}
+
+.login-container{
+    -fx-background-radius: 15;
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+.titulo{
+    -fx-font-size: 20px; 
+    -fx-font-weight: bold;
+}
+
+.campo{
+    
+}

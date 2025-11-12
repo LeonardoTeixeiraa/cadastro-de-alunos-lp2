@@ -6,8 +6,8 @@ package com.empresa.leonardoteixeiralucassiconeli_projetofinal.service;
 
 import com.empresa.leonardoteixeiralucassiconeli_projetofinal.exception.RegraNegocioException;
 import com.empresa.leonardoteixeiralucassiconeli_projetofinal.model.Aluno;
-import java.util.ArrayList;
-import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -15,7 +15,18 @@ import java.util.List;
  */
 public class AlunoService {
 
-    private List<Aluno> alunos = new ArrayList<>();
+    private static AlunoService instance;
+    private final ObservableList<Aluno> alunos = FXCollections.observableArrayList();
+
+    private AlunoService() {
+    }
+
+    public static AlunoService getInstance() {
+        if (instance == null) {
+            instance = new AlunoService();
+        }
+        return instance;
+    }
 
     public void cadastrar(Aluno aluno) throws RegraNegocioException {
         if (aluno.getNome() == null || aluno.getNome().isBlank()) {
@@ -24,7 +35,10 @@ public class AlunoService {
         alunos.add(aluno);
     }
 
-    public List<Aluno> listar() {
+  public ObservableList<Aluno> listar() {
+      for(Aluno a : alunos){
+          System.out.println(a);
+      }
         return alunos;
     }
 }
