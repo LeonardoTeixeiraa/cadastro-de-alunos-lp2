@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.empresa.leonardoteixeiralucassiconeli_projetofinal.controller.PrincipalController">
+    <top>
+        <MenuBar>
+            <Menu text="Alunos">
+                <MenuItem text="Cadastrar" onAction="#abrirCadastroAluno" />
+            </Menu>
+            <Menu text="Sair">
+                <MenuItem text="Logout" onAction="#logout" />
+            </Menu>
+        </MenuBar>
+    </top>
+    <center>
+        <TableView fx:id="tabelaAlunos">
+            <columns>
+                <TableColumn fx:id="colNome" text="Nome" prefWidth="150" />
+                <TableColumn fx:id="colMatricula" text="Matrícula" prefWidth="100" />
+                <TableColumn fx:id="colCurso" text="Curso" prefWidth="150" />
+                <TableColumn fx:id="colIdade" text="Idade" prefWidth="60" />
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

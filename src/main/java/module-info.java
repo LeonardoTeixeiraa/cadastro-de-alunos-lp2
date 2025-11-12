@@ -3,5 +3,8 @@ module com.empresa.leonardoteixeiralucassiconeli_projetofinal {
     requires javafx.fxml;
 
     opens com.empresa.leonardoteixeiralucassiconeli_projetofinal to javafx.fxml;
+    opens com.empresa.leonardoteixeiralucassiconeli_projetofinal.controller to javafx.fxml;
+
     exports com.empresa.leonardoteixeiralucassiconeli_projetofinal;
+    exports com.empresa.leonardoteixeiralucassiconeli_projetofinal.controller;
 }
