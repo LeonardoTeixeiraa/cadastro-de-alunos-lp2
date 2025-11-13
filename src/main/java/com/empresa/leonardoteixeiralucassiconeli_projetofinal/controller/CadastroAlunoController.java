@@ -34,6 +34,7 @@ public class CadastroAlunoController {
 
             service.cadastrar(aluno);
             MensagemFactory.criarMensagem("sucesso", "Cadastro", "Aluno cadastrado com sucesso!").showAndWait();
+            limparCampos();
         } catch (RegraNegocioException e) {
             MensagemFactory.criarMensagem("erro", "Erro de Cadastro", e.getMessage()).showAndWait();
         } catch (NumberFormatException e) {
@@ -44,6 +45,14 @@ public class CadastroAlunoController {
     @FXML
     private void voltar() throws Exception {
         App.mudarTela("principal.fxml");
+    }
+
+    @FXML
+    private void limparCampos() {
+        txtNome.clear();
+        txtMatricula.clear();
+        txtCurso.clear();
+        txtIdade.clear();
     }
 
 }
