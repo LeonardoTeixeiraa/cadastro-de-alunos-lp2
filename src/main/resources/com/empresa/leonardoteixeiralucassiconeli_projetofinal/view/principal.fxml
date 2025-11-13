@@ -6,7 +6,9 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/24.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.empresa.leonardoteixeiralucassiconeli_projetofinal.controller.PrincipalController">
+            fx:controller="com.empresa.leonardoteixeiralucassiconeli_projetofinal.controller.PrincipalController"
+      stylesheets="@styles.css"
+            styleClass="root">
 
     <top>
         <VBox spacing="5">

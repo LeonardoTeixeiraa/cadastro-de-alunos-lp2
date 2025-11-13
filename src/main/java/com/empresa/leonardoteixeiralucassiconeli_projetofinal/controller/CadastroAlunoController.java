@@ -16,14 +16,12 @@ import javafx.scene.control.TextField;
  *
  * @author leonardo-teixeira
  */
-
 public class CadastroAlunoController {
 
     @FXML
     private TextField txtNome, txtMatricula, txtCurso, txtIdade;
 
     private final AlunoService service = AlunoService.getInstance();
-
 
     @FXML
     private void salvarAluno() {
@@ -47,4 +45,5 @@ public class CadastroAlunoController {
     private void voltar() throws Exception {
         App.mudarTela("principal.fxml");
     }
+
 }

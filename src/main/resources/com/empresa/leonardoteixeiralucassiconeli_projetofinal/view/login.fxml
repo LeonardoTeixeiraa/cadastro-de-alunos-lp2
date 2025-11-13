@@ -8,17 +8,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/24.0.1" fx:controller="com.empresa.leonardoteixeiralucassiconeli_projetofinal.controller.LoginController"
-            stylesheets="@styles.css"
-            styleClass="root">
-    <children>
-        <VBox alignment="CENTER" layoutX="7.0" prefHeight="250" prefWidth="400" spacing="10">
-            <Label styleClass="titulo"  text="Login do Sistema" />
-            <Label text="Usuário:" />
-            <TextField fx:id="txtUsuario" prefHeight="19.0" prefWidth="362.0" promptText="Usuário"  styleClass="campo" />
-            <Label text="Senha:" />
-            <PasswordField fx:id="txtSenha" promptText="Senha" styleClass="campo"/>
-            <Button onAction="#entrar" text="Entrar" />
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           xmlns="http://javafx.com/javafx/24.0.1"
+           fx:controller="com.empresa.leonardoteixeiralucassiconeli_projetofinal.controller.LoginController"
+           stylesheets="@styles.css"
+           styleClass="root">
+
+    <VBox fx:id="loginBox" styleClass="login-container" alignment="CENTER_LEFT">
+        <Label text="Login do Sistema" styleClass="titulo" />
+        <VBox alignment="CENTER_LEFT" >
+            <Label text="Usuário:" styleClass="label-login" />
         </VBox>
-    </children>
+        <TextField fx:id="txtUsuario" promptText="Usuário" styleClass="campo" />
+        <VBox alignment="CENTER_LEFT" >
+            <Label text="Senha:" styleClass="label-login" />
+        </VBox>
+        <PasswordField fx:id="txtSenha" promptText="Senha" styleClass="campo" />
+        <Button text="Entrar" onAction="#entrar" />
+    </VBox>
 </StackPane>
+
