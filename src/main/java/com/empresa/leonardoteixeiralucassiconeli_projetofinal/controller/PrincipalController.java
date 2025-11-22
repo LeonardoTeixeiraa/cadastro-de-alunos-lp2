@@ -4,11 +4,10 @@ import com.empresa.leonardoteixeiralucassiconeli_projetofinal.App;
 import com.empresa.leonardoteixeiralucassiconeli_projetofinal.model.Aluno;
 import com.empresa.leonardoteixeiralucassiconeli_projetofinal.service.AlunoService;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.Optional;
 
 public class PrincipalController {
 
@@ -36,7 +35,7 @@ public class PrincipalController {
 
         tabelaAlunos.setItems(service.listar());
     }
-    
+
     @FXML
     private void pesquisarAluno() {
         String termo = txtPesquisa.getText().toLowerCase();
@@ -45,7 +44,7 @@ public class PrincipalController {
             tabelaAlunos.setItems(service.listar());
             return;
         }
-        
+
         var filtrados = service.listar().filtered(aluno
                 -> aluno.getNome().toLowerCase().contains(termo)
                 || aluno.getMatricula().toLowerCase().contains(termo)
@@ -61,6 +60,18 @@ public class PrincipalController {
 
     @FXML
     private void logout() throws Exception {
-        App.mudarTela("login.fxml");
+
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        alerta.setTitle("Confirmar Logout");
+        alerta.setHeaderText("Deseja realmente sair da sua conta?");
+        alerta.setContentText("Você será redirecionado para a tela de login.");
+
+        Optional<ButtonType> resultado = alerta.showAndWait();
+
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            // Usuário confirmou — faz o logout
+            App.mudarTela("login.fxml");
+        } 
+        // Se o usuário clicar em CANCELAR, nada acontece.
     }
 }
