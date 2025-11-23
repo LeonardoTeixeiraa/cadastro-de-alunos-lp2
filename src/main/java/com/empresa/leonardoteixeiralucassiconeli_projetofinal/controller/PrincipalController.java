@@ -52,6 +52,41 @@ public class PrincipalController {
 
         tabelaAlunos.setItems(filtrados);
     }
+    
+    @FXML
+private void excluirAluno() {
+
+    Aluno alunoSelecionado = tabelaAlunos.getSelectionModel().getSelectedItem();
+
+    if (alunoSelecionado == null) {
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setTitle("Nenhum aluno selecionado");
+        alerta.setHeaderText("Selecione um aluno na tabela para excluir.");
+        alerta.showAndWait();
+        return;
+    }
+
+    Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
+    confirmacao.setTitle("Confirmar exclusão");
+    confirmacao.setHeaderText("Deseja excluir o aluno selecionado?");
+    confirmacao.setContentText(
+            "Aluno: " + alunoSelecionado.getNome() + "\nMatrícula: " + alunoSelecionado.getMatricula()
+    );
+
+    Optional<ButtonType> resultado = confirmacao.showAndWait();
+
+    if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+
+        service.remover(alunoSelecionado);
+        tabelaAlunos.setItems(service.listar());
+
+        Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
+        sucesso.setTitle("Aluno removido");
+        sucesso.setHeaderText("Aluno removido com sucesso!");
+        sucesso.showAndWait();
+    }
+}
+
 
     @FXML
     private void abrirCadastroAluno() throws Exception {

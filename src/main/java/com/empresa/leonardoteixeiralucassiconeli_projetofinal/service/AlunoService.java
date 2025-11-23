@@ -41,4 +41,8 @@ public class AlunoService {
       }
         return alunos;
     }
+  
+  public void remover(Aluno aluno) {
+    alunos.remove(aluno); 
+}
 }
