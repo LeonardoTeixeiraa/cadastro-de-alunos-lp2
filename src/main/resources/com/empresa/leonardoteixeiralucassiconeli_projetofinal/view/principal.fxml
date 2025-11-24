@@ -29,6 +29,7 @@
                 <TextField fx:id="txtPesquisa" promptText="Pesquisar aluno por nome ou matrícula..." prefWidth="300" />
                 <Button text="Pesquisar" onAction="#pesquisarAluno" />
                 <Button text="Excluir" onAction="#excluirAluno" />
+                <Button fx:id="btnEditar" text="Editar" onAction="#editarAluno"/>
             </HBox>
         </VBox>
     </top>

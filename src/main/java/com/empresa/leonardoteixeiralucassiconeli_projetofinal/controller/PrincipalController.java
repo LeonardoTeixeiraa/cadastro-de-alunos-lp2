@@ -52,41 +52,57 @@ public class PrincipalController {
 
         tabelaAlunos.setItems(filtrados);
     }
-    
+
     @FXML
-private void excluirAluno() {
+    private void excluirAluno() {
 
-    Aluno alunoSelecionado = tabelaAlunos.getSelectionModel().getSelectedItem();
+        Aluno alunoSelecionado = tabelaAlunos.getSelectionModel().getSelectedItem();
 
-    if (alunoSelecionado == null) {
-        Alert alerta = new Alert(Alert.AlertType.WARNING);
-        alerta.setTitle("Nenhum aluno selecionado");
-        alerta.setHeaderText("Selecione um aluno na tabela para excluir.");
-        alerta.showAndWait();
-        return;
+        if (alunoSelecionado == null) {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Nenhum aluno selecionado");
+            alerta.setHeaderText("Selecione um aluno na tabela para excluir.");
+            alerta.showAndWait();
+            return;
+        }
+
+        Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacao.setTitle("Confirmar exclusão");
+        confirmacao.setHeaderText("Deseja excluir o aluno selecionado?");
+        confirmacao.setContentText(
+                "Aluno: " + alunoSelecionado.getNome() + "\nMatrícula: " + alunoSelecionado.getMatricula()
+        );
+
+        Optional<ButtonType> resultado = confirmacao.showAndWait();
+
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+
+            service.remover(alunoSelecionado);
+            tabelaAlunos.setItems(service.listar());
+
+            Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
+            sucesso.setTitle("Aluno removido");
+            sucesso.setHeaderText("Aluno removido com sucesso!");
+            sucesso.showAndWait();
+        }
     }
 
-    Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
-    confirmacao.setTitle("Confirmar exclusão");
-    confirmacao.setHeaderText("Deseja excluir o aluno selecionado?");
-    confirmacao.setContentText(
-            "Aluno: " + alunoSelecionado.getNome() + "\nMatrícula: " + alunoSelecionado.getMatricula()
-    );
+    @FXML
+    private void editarAluno() throws Exception {
+        Aluno selecionado = tabelaAlunos.getSelectionModel().getSelectedItem();
 
-    Optional<ButtonType> resultado = confirmacao.showAndWait();
+        if (selecionado == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Selecione um aluno para editar.");
+            alert.showAndWait();
+            return;
+        }
 
-    if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+        // Passa o aluno para a tela de cadastro
+        CadastroAlunoController controller = (CadastroAlunoController) App.mudarTela("cadastroAluno.fxml");
 
-        service.remover(alunoSelecionado);
-        tabelaAlunos.setItems(service.listar());
-
-        Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
-        sucesso.setTitle("Aluno removido");
-        sucesso.setHeaderText("Aluno removido com sucesso!");
-        sucesso.showAndWait();
+        controller.carregarAlunoParaEdicao(selecionado);
     }
-}
-
 
     @FXML
     private void abrirCadastroAluno() throws Exception {
@@ -106,7 +122,7 @@ private void excluirAluno() {
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
             // Usuário confirmou — faz o logout
             App.mudarTela("login.fxml");
-        } 
+        }
         // Se o usuário clicar em CANCELAR, nada acontece.
     }
 }

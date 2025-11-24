@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.empresa.leonardoteixeiralucassiconeli_projetofinal.controller;
 
 import com.empresa.leonardoteixeiralucassiconeli_projetofinal.App;
@@ -10,41 +6,66 @@ import com.empresa.leonardoteixeiralucassiconeli_projetofinal.factory.MensagemFa
 import com.empresa.leonardoteixeiralucassiconeli_projetofinal.model.Aluno;
 import com.empresa.leonardoteixeiralucassiconeli_projetofinal.service.AlunoService;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-/**
- *
- * @author leonardo-teixeira
- */
 public class CadastroAlunoController {
 
     @FXML
     private TextField txtNome, txtMatricula, txtCurso, txtIdade;
 
+    @FXML
+    private Button btnSalvar;
+
     private final AlunoService service = AlunoService.getInstance();
+    private Aluno alunoEmEdicao = null;
 
     @FXML
     private void salvarAluno() {
         try {
-            Aluno aluno = new Aluno();
-            aluno.setNome(txtNome.getText());
-            aluno.setMatricula(txtMatricula.getText());
-            aluno.setCurso(txtCurso.getText());
-            aluno.setIdade(Integer.parseInt(txtIdade.getText()));
+            if (alunoEmEdicao == null) {
+                cadastrarNovoAluno();
+            } else {
+                atualizarAlunoExistente();
+            }
 
-            service.cadastrar(aluno);
-            MensagemFactory.criarMensagem("sucesso", "Cadastro", "Aluno cadastrado com sucesso!").showAndWait();
             limparCampos();
-        } catch (RegraNegocioException e) {
-            MensagemFactory.criarMensagem("erro", "Erro de Cadastro", e.getMessage()).showAndWait();
-        } catch (NumberFormatException e) {
-            MensagemFactory.criarMensagem("erro", "Erro", "Idade deve ser um número inteiro.").showAndWait();
+
+        } catch (Exception e) {
+            MensagemFactory.criarMensagem("erro", "Erro", e.getMessage()).showAndWait();
         }
     }
 
-    @FXML
-    private void voltar() throws Exception {
-        App.mudarTela("principal.fxml");
+    private void cadastrarNovoAluno() throws RegraNegocioException {
+        Aluno aluno = new Aluno();
+        aluno.setNome(txtNome.getText());
+        aluno.setMatricula(txtMatricula.getText());
+        aluno.setCurso(txtCurso.getText());
+        aluno.setIdade(Integer.parseInt(txtIdade.getText()));
+
+        service.cadastrar(aluno);
+        MensagemFactory.criarMensagem("sucesso", "Cadastro", "Aluno cadastrado com sucesso!").showAndWait();
+    }
+
+    private void atualizarAlunoExistente() throws RegraNegocioException {
+        alunoEmEdicao.setNome(txtNome.getText());
+        alunoEmEdicao.setMatricula(txtMatricula.getText());
+        alunoEmEdicao.setCurso(txtCurso.getText());
+        alunoEmEdicao.setIdade(Integer.parseInt(txtIdade.getText()));
+
+        MensagemFactory.criarMensagem("sucesso", "Atualização", "Aluno atualizado com sucesso!").showAndWait();
+    }
+
+    // ---- CHAMADO PELO PRINCIPALCONTROLLER ----
+    public void carregarAlunoParaEdicao(Aluno aluno) {
+        this.alunoEmEdicao = aluno;
+
+        txtNome.setText(aluno.getNome());
+        txtMatricula.setText(aluno.getMatricula());
+        txtCurso.setText(aluno.getCurso());
+        txtIdade.setText(String.valueOf(aluno.getIdade()));
+
+        btnSalvar.setText("Salvar alterações");
     }
 
     @FXML
@@ -55,4 +76,8 @@ public class CadastroAlunoController {
         txtIdade.clear();
     }
 
+    @FXML
+    private void voltar() throws Exception {
+        App.mudarTela("principal.fxml");
+    }
 }

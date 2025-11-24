@@ -19,10 +19,11 @@ public class App extends Application {
         stage.show();
     }
 
-    public static void mudarTela(String fxml) throws Exception {
+    public static Object mudarTela(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("view/" + fxml));
-        Scene novaCena = new Scene(loader.load());
-        primaryStage.setScene(novaCena);
+        Scene cena = new Scene(loader.load());
+        primaryStage.setScene(cena);
+        return loader.getController();
     }
 
     public static void main(String[] args) {

@@ -16,7 +16,7 @@
             <TextField fx:id="txtCurso" promptText="Curso" />
             <TextField fx:id="txtIdade" promptText="Idade" />
             <HBox alignment="CENTER" spacing="10">
-                <Button text="Salvar" onAction="#salvarAluno" />
+                <Button fx:id="btnSalvar" text="Salvar" onAction="#salvarAluno" />
                 <Button text="Voltar" onAction="#voltar" />
             </HBox>
         </VBox>

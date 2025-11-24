@@ -25,7 +25,6 @@ public class AlunoServiceTest {
     void setUp() {
         service = AlunoService.getInstance();
 
-        // Limpa a lista antes de cada teste (importante!)
         ObservableList<Aluno> lista = service.listar();
         lista.clear();
     }
@@ -47,7 +46,7 @@ public class AlunoServiceTest {
     @Test
     void naoDeveCadastrarAlunoComNomeVazio() {
         Aluno aluno = new Aluno();
-        aluno.setNome(""); // inválido
+        aluno.setNome(""); 
         aluno.setCurso("Sistemas");
         aluno.setMatricula("2023999");
         aluno.setIdade(18);

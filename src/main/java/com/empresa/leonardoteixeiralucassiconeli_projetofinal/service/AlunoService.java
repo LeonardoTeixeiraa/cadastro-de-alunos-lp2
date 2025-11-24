@@ -35,14 +35,25 @@ public class AlunoService {
         alunos.add(aluno);
     }
 
-  public ObservableList<Aluno> listar() {
-      for(Aluno a : alunos){
-          System.out.println(a);
-      }
+    public void editar(Aluno alunoOriginal, Aluno alunoEditado) throws RegraNegocioException {
+        if (alunoEditado.getNome() == null || alunoEditado.getNome().isBlank()) {
+            throw new RegraNegocioException("Nome do aluno é obrigatório.");
+        }
+
+        alunoOriginal.setNome(alunoEditado.getNome());
+        alunoOriginal.setMatricula(alunoEditado.getMatricula());
+        alunoOriginal.setCurso(alunoEditado.getCurso());
+        alunoOriginal.setIdade(alunoEditado.getIdade());
+    }
+
+    public ObservableList<Aluno> listar() {
+        for (Aluno a : alunos) {
+            System.out.println(a);
+        }
         return alunos;
     }
-  
-  public void remover(Aluno aluno) {
-    alunos.remove(aluno); 
-}
+
+    public void remover(Aluno aluno) {
+        alunos.remove(aluno);
+    }
 }
