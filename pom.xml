@@ -22,11 +22,18 @@
             <artifactId>javafx-fxml</artifactId>
             <version>13</version>
         </dependency>
+        <!--dependências do JUNIT-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>5.10.2</version>
             <scope>test</scope>
+        </dependency>
+        <!--biblioteca GSON para trabalhar com dadosê JSON-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
         </dependency>
     </dependencies>
     <build>
@@ -54,7 +61,15 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>com.empresa.leonardoteixeiralucassiconeli_projetofinal.App</mainClass>
-                </configuration>
+                    <!--dependência para trabalhar com a biblioteca JSON-->
+                    <extraDependencies>
+                        <dependency>
+                            <groupId>com.google.code.gson</groupId>
+                            <artifactId>gson</artifactId>
+                            <version>2.10.1</version>
+                        </dependency>
+                    </extraDependencies>
+            </configuration>
             </plugin>
         </plugins>
     </build>

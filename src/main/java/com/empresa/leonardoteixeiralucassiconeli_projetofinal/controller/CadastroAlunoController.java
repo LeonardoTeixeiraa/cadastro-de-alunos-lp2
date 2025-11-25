@@ -28,9 +28,7 @@ public class CadastroAlunoController {
             } else {
                 atualizarAlunoExistente();
             }
-
             limparCampos();
-
         } catch (Exception e) {
             MensagemFactory.criarMensagem("erro", "Erro", e.getMessage()).showAndWait();
         }
@@ -52,11 +50,11 @@ public class CadastroAlunoController {
         alunoEmEdicao.setMatricula(txtMatricula.getText());
         alunoEmEdicao.setCurso(txtCurso.getText());
         alunoEmEdicao.setIdade(Integer.parseInt(txtIdade.getText()));
-
+        
+        service.atualizarAluno(alunoEmEdicao, alunoEmEdicao);
         MensagemFactory.criarMensagem("sucesso", "Atualização", "Aluno atualizado com sucesso!").showAndWait();
     }
 
-    // ---- CHAMADO PELO PRINCIPALCONTROLLER ----
     public void carregarAlunoParaEdicao(Aluno aluno) {
         this.alunoEmEdicao = aluno;
 

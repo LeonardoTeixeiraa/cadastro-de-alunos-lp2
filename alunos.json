@@ -1,0 +1,32 @@
+[
+  {
+    "nome": "Alexandre",
+    "matricula": "VP23897",
+    "curso": "BSI",
+    "idade": 40
+  },
+  {
+    "nome": "Bruno de Morais",
+    "matricula": "Vp138947",
+    "curso": "BSI",
+    "idade": 21
+  },
+  {
+    "nome": "Siconeli",
+    "matricula": "VP23898",
+    "curso": "BSI",
+    "idade": 19
+  },
+  {
+    "nome": "Geraldo",
+    "matricula": "vp93234",
+    "curso": "Civil",
+    "idade": 20
+  },
+  {
+    "nome": "Beraldo",
+    "matricula": "VP139084",
+    "curso": "BSI",
+    "idade": 20
+  }
+]

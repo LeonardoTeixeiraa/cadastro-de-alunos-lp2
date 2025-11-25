@@ -6,6 +6,7 @@ package com.empresa.leonardoteixeiralucassiconeli_projetofinal.service;
 
 import com.empresa.leonardoteixeiralucassiconeli_projetofinal.exception.RegraNegocioException;
 import com.empresa.leonardoteixeiralucassiconeli_projetofinal.model.Aluno;
+import com.empresa.leonardoteixeiralucassiconeli_projetofinal.repository.AlunoRepositoryJSON;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -16,9 +17,11 @@ import javafx.collections.ObservableList;
 public class AlunoService {
 
     private static AlunoService instance;
+
     private final ObservableList<Aluno> alunos = FXCollections.observableArrayList();
 
     private AlunoService() {
+        alunos.addAll(AlunoRepositoryJSON.carregar());
     }
 
     public static AlunoService getInstance() {
@@ -33,27 +36,30 @@ public class AlunoService {
             throw new RegraNegocioException("Nome do aluno é obrigatório.");
         }
         alunos.add(aluno);
-    }
-
-    public void editar(Aluno alunoOriginal, Aluno alunoEditado) throws RegraNegocioException {
-        if (alunoEditado.getNome() == null || alunoEditado.getNome().isBlank()) {
-            throw new RegraNegocioException("Nome do aluno é obrigatório.");
-        }
-
-        alunoOriginal.setNome(alunoEditado.getNome());
-        alunoOriginal.setMatricula(alunoEditado.getMatricula());
-        alunoOriginal.setCurso(alunoEditado.getCurso());
-        alunoOriginal.setIdade(alunoEditado.getIdade());
+        salvarNoArquivo();
     }
 
     public ObservableList<Aluno> listar() {
-        for (Aluno a : alunos) {
-            System.out.println(a);
-        }
         return alunos;
     }
 
     public void remover(Aluno aluno) {
         alunos.remove(aluno);
+        salvarNoArquivo();
     }
+
+    public void atualizarAluno(Aluno antigo, Aluno novo) {
+        alunos.remove(antigo);
+        alunos.add(novo);
+        salvarNoArquivo();
+    }
+
+    private void salvarNoArquivo() {
+        AlunoRepositoryJSON.salvar(alunos);
+    }
+
+    public void salvarAlteracoes() {
+        salvarNoArquivo();
+    }
+
 }
